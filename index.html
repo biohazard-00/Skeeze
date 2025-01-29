@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fart Clicker</title>
+    <style>
+        body {
+            background-color: black;
+            color: green;
+            font-family: monospace;
+            text-align: center;
+        }
+        button {
+            background-color: green;
+            color: black;
+            font-size: 20px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .store {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fart Clicker: The Gas-Powered Economy</h1>
+    <p>Fart Tokens: <span id="tokens">0</span></p>
+    <button onclick="fart()">Fart</button>
+    <div class="store">
+        <h2>Store</h2>
+        <button onclick="buyUpgrade()">Buy Bigger Beans (Cost: <span id="upgradeCost">10</span>)</button>
+        <button onclick="buyFactory()">Buy Fart Factory (Cost: <span id="factoryCost">100</span>)</button>
+    </div>
+    
+    <script>
+        let tokens = 0;
+        let perClick = 1;
+        let factories = 0;
+        let upgradeCost = 10;
+        let factoryCost = 100;
+
+        function fart() {
+            tokens += perClick;
+            document.getElementById("tokens").innerText = tokens;
+        }
+
+        function buyUpgrade() {
+            if (tokens >= upgradeCost) {
+                tokens -= upgradeCost;
+                perClick++;
+                upgradeCost = Math.floor(upgradeCost * 1.5);
+                document.getElementById("tokens").innerText = tokens;
+                document.getElementById("upgradeCost").innerText = upgradeCost;
+            }
+        }
+
+        function buyFactory() {
+            if (tokens >= factoryCost) {
+                tokens -= factoryCost;
+                factories++;
+                factoryCost = Math.floor(factoryCost * 1.5);
+                document.getElementById("tokens").innerText = tokens;
+                document.getElementById("factoryCost").innerText = factoryCost;
+            }
+        }
+
+        setInterval(() => {
+            tokens += factories;
+            document.getElementById("tokens").innerText = tokens;
+        }, 1000);
+    </script>
+</body>
+</html>
